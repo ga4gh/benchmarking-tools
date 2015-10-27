@@ -1,0 +1,9 @@
+[submodule "tools/rtg-tools"]
+	path = tools/rtg-tools
+	url = https://github.com/RealTimeGenomics/rtg-tools
+[submodule "tools/vgraph"]
+	path = tools/vgraph
+	url = https://github.com/bioinformed/vgraph.git
+[submodule "tools/hap.py"]
+	path = tools/hap.py
+	url = https://github.com/Illumina/hap.py.git
