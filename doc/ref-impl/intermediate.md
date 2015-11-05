@@ -14,13 +14,21 @@ A comparison engine should
    - True Positive / `TP`: present in both truth and query
    - False Positive / `FP`: present only in the query
    - False Negative / `FN`: present only in the truth
+   - Not-assessed / `N`: call was not assigned a match status
 *  (optionally) output additional information about each decision
 
-Note that we would output the FP/TP/FN labels separately for truth and
+Note that we would output the FP/TP/FN/N labels separately for truth and
 for query variants. For simple comparison types which do not attempt to
 reconcile different variant representations, the assigned type for truth
 and query might be the same. However, more sophisticated methods (e.g.
 vcfeval) will be able to type truth and query variants separately.
+
+The N label may be applied for a variety of reasons, which may be
+specific to the comparison engine. For example, a comparison engine
+might not assess input calls which had non-PASS FILTER fields, or may
+choose to ignore half-calls. Alternatively an engine may find that some
+call regions are too complex to confidently assess. Additional
+information may be included in the BT annotation.
 
 A comparison engine should also preserve input INFO / FORMAT annotations to the
 largest degree possible (depending on the variant processing it does).
