@@ -8,6 +8,8 @@ The second problem with the infinite number of potential variants is that it is 
 
 An initial step in understanding how to stratify variants is to collect the different potential ways to stratify into categories and develop methods to stratify variants into these categories. Stratification can be performed in several distinct ways: by variant type, by sequence context, by functional significance, and by characteristics of the sequencing reads.  These different ways to stratify can be combined in a multitude of ways (e.g., SNVs in homopolymers in exons with coverage > 20), which can help focus validation only on specific types of variants for which performance is poor.  However, it should be noted that as performance is stratified into increasingly smaller categories, there may no longer be sufficient variants or homozygous reference bases to get useful estimates of performance metrics because the confidence intervals on the metrics become too large.  Therefore, it will be necessary to understand how best to stratify variants for each sequencing and bioinformatics pipeline.
 
+Some standard BED files describing potentially difficult regions are provided for stratification under [doc/resources/stratification-bed-files/](doc/resources/stratification-bed-files/)
+
 The software shall be able to output performance for different types of variants:
 
 * SNVs

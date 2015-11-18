@@ -22,3 +22,7 @@ The benchmarking process contains a variety of steps and inputs. In
 [doc/ref-impl/](doc/ref-impl/), we standardise intermediate
 formats for specifying truth sets, stratification regions, and intermediate 
 outputs from comparison tools.
+
+# Benchmarking resources
+
+In [doc/resources/](doc/resources/), we provide files useful in the benchmarking process.  Currently, this includes standardized bed files describing potentially difficult regions for performance stratification.
