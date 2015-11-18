@@ -1,1 +1,1 @@
-TODO: convert / link google docs.
+This section contains documents with standardized definitions developed by the GA4GH Benchmarking Team. Currently, we have developed definitions for performance metrics and definitions for methods to stratify performance.
