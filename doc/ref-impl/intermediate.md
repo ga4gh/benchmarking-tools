@@ -45,14 +45,14 @@ these FORMAT annotations:
 
 Currently, we distinguish the following subtypes:
 
-| BK (rows) / BD (cols) | TP                                           | FP / FN             |
+| BK (rows) / BD (cols) |                      TP                      |       FP / FN       |
 |:----------------------|:--------------------------------------------:|:-------------------:|
-| m            | direct match                                 | (invalid)           |
-| cm           | complex match (together with other variants) | (invalid)           |
-| pm           | (invalid)                                    | complex mismatch    |
-| gtmm         | (invalid)                                    | Genotypes mismatch  |
-| almm         | (invalid)                                    | Alleles mismatch    |
-| miss         | (invalid)                                    | Variant not present |
+| m                     |                 direct match                 |      (invalid)      |
+| cm                    | complex match (together with other variants) |      (invalid)      |
+| pm                    |                  (invalid)                   |  complex mismatch   |
+| gtmm                  |                  (invalid)                   | Genotypes mismatch  |
+| almm                  |                  (invalid)                   |  Alleles mismatch   |
+| miss                  |                  (invalid)                   | Variant not present |
 
 ## Additional VCF Annotations
 
@@ -68,15 +68,18 @@ Optionally, these can be passed for ROC creation / further processing:
 ##FORMAT=<ID=QQ,Number=1,Type=Float,Description="Variant quality for ROC creation.">
 ```
 
-Another feature that is common to our comparison engines is the idea of
-separating out regions in which variants might interact due to different
-representation. In order to group variants into such blocks, we introduce
-the following INFO annotation that allows us to assign a superlocus ID to
-each variant record.
+Since we aim to benchmark variant calls independently of their
+representation, we also define *superloci*. A *superlocus* is a
+set of variant calls that intends to fully describe the variation within
+a contiguous reference
+region that may contain complex variation with different representations.
+In order to group variants into blocks by superlocus, we introduce
+the following INFO annotation that allows us to assign a benchmarking
+superlocus ID to each variant record.
 
 ```
-##INFO=<ID=SUPERLOCUS_ID,Number=1,Type=Integer,Description="Superlocus ID for these variants.">
+##INFO=<ID=BS,Number=1,Type=Integer,Description="Benchmarking superlocus ID for these variants.">
 ```
 
 In downstream tools, this may e.g. be used to count with superlocus
-granularity.  
+granularity.
