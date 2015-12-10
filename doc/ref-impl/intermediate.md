@@ -28,7 +28,7 @@ specific to the comparison engine. For example, a comparison engine
 might not assess input calls which had non-PASS FILTER fields, or may
 choose to ignore half-calls. Alternatively an engine may find that some
 call regions are too complex to confidently assess. Additional
-information may be included in the BT annotation.
+information may be included in the BI annotation.
 
 A comparison engine should also preserve input INFO / FORMAT annotations to the
 largest degree possible (depending on the variant processing it does).
@@ -56,15 +56,21 @@ Currently, we distinguish the following subtypes:
 
 ## Additional VCF Annotations
 
-We allow for comparison engines to transform the input variants for more
-granular accounting / comparison. To facilitate ROC creation based on such
-a processed variant file, we define the following FORMAT annotations to
-pass on additional information.
-
-Optionally, these can be passed for ROC creation / further processing:
+Comparison engines may have engine-specific status information that is
+useful to present in the output (for example, error status, specific
+match sub-algorithm used, etc). This can be recorded in the optional
+BI annotation:
 
 ```
-##FORMAT=<ID=BT,Number=1,Type=String,Description="Type of comparison performed">
+##FORMAT=<ID=BI,Number=1,Type=String,Description="Additional match status information">
+```
+
+We allow for comparison engines to transform the input variants for more
+granular accounting / comparison. To facilitate ROC creation based on such
+a processed variant file, we define the following FORMAT annotation to
+pass on a variant quality score obtained from the input variants:
+
+```
 ##FORMAT=<ID=QQ,Number=1,Type=Float,Description="Variant quality for ROC creation.">
 ```
 
