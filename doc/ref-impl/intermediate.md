@@ -70,16 +70,16 @@ types. Here are two examples.
 Find all variants in the query where another variant was seen nearby in the
 truth.
 
-|  **BK**  | **BD (Truth)** | **BD (Query) |
-|:--------:|:--------------:|:------------:|
-|    .     |       FN       |      FP      |
-| lm/am/gm |       TP       |      TP      |
+|  **BK**  | **BD (Truth)** | **BD (Query)** |
+|:--------:|:--------------:|:--------------:|
+|    .     |       FN       |       FP       |
+| lm/am/gm |       TP       |       TP       |
 
 ### Genotype Comparison
 
 Test genotype concordance between truth and query.
 
-| **BK** |     **BD (Truth)**     |      **BD (Query)      |
+| **BK** |     **BD (Truth)**     |     **BD (Query)**     |
 |:------:|:----------------------:|:----------------------:|
 |  ./lm  |           FN           |           FP           |
 |   am   | FN (genotype mismatch) | FP (genotype mismatch) |
