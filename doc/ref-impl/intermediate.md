@@ -39,20 +39,52 @@ The intermediate VCF must have two columns named TRUTH and QUERY, with
 these FORMAT annotations:
 
 ```
-##FORMAT=<ID=BD,Number=1,Type=String,Description="Decision for call (TP/FP/FN/N)">
 ##FORMAT=<ID=BK,Number=1,Type=String,Description="Sub-type for decision (match/mismatch type)">
 ```
 
-Currently, we distinguish the following subtypes:
+The value of BK specifies the class of match for each variant record:
 
-| BK (rows) / BD (cols) |                      TP                      |       FP / FN       |
-|:----------------------|:--------------------------------------------:|:-------------------:|
-| m                     |                 direct match                 |      (invalid)      |
-| cm                    | complex match (together with other variants) |      (invalid)      |
-| pm                    |                  (invalid)                   |  complex mismatch   |
-| gtmm                  |                  (invalid)                   | Genotypes mismatch  |
-| almm                  |                  (invalid)                   |  Alleles mismatch   |
-| miss                  |                  (invalid)                   | Variant not present |
+1. `.`: *missing* = no match at any level tested by the comparison tool
+2. `lm`: *loose match* = the truth/query variant is nearby a variant in the
+   query/truth -- if the tool outputs such match types, it should annotate
+   the VCF header with the definition of loose matches (e.g. match within a
+   fixed window, or within the same superlocus).
+3. `am`: *almatch* = the variant forms (part of) an allele match (independent of
+   representation, i.e. one-sided haplotype match)
+4. `gm`: *gtmatch* = diploid haplotypes (and genotypes) were resolved to be the same
+   (independent of representation)
+
+Based on the values in BK, comparison tools must assign a decision for each
+variant call that assigns true/false postive/negative status. This status is
+output in the BD format field:
+
+```
+##FORMAT=<ID=BD,Number=1,Type=String,Description="Decision for call (TP/FP/FN/N)">
+```
+
+The mapping of combinations of BK values to BD may vary for different comparison
+types. Here are two examples.
+
+### Loose variant comparison
+
+Find all variants in the query where another variant was seen nearby in the
+truth.
+
+|  **BK**  | **BD (Truth)** | **BD (Query)** |
+|:--------:|:--------------:|:--------------:|
+|    .     |       FN       |       FP       |
+| lm/am/gm |       TP       |       TP       |
+
+### Genotype Comparison
+
+Test genotype concordance between truth and query.
+
+| **BK** |     **BD (Truth)**     |     **BD (Query)**     |
+|:------:|:----------------------:|:----------------------:|
+|  ./lm  |           FN           |           FP           |
+|   am   | FN (genotype mismatch) | FP (genotype mismatch) |
+|   gm   |           TP           |           TP           |
+
 
 ## Additional VCF Annotations
 
