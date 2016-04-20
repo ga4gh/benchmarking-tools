@@ -12,7 +12,13 @@ Truth datasets may consist of the following parts:
 The format of these files can vary depending on the benchmark type, e.g. for
 diploid genotype comparisons, we require the `GT` format field to be present.
 
+Note that "Confident Call Regions" from Truth and/or Query are applied only
+after the VCF comparison to enable better comparison of variants that can
+have different representations putting them either inside or outside the
+confident call regions.  In contrast, if only variants inside the confident
+call regions are included during the VCF comparison, then some TP calls are
+incorrectly classified as FPs and/or FNs.
+
 ## Query data
 
 The query data consists of a single (g)VCF file.
-

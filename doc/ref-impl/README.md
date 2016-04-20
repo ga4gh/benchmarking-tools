@@ -8,7 +8,7 @@ The goal of this reference implementation is to
 
 * support different benchmark types
 * allow adding  new comparison types
-* counts consistently
+* counts consistently and accurately for different truth sets
 * support common truth datasets
 * allow anyone to contribute
 
