@@ -1,0 +1,2 @@
+method	comparisonmethod	files
+gatk3	hap.py	"gatk3.extended.csv,gatk3.roc.Locations.INDEL.csv,gatk3.roc.Locations.SNP.csv,gatk3.roc.Locations.INDEL.PASS.csv,gatk3.roc.Locations.SNP.PASS.csv"
