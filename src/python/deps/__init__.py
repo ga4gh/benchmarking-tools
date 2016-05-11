@@ -78,7 +78,8 @@ def find(name, env_var=None, to_try=None, default=None,
 def setup():
     DEPS["hap.py"] = find("hap.py",
                           env_var="HAPPY",
-                          to_try=["/opt/hap.py/bin",
+                          to_try=["/opt/hap.py/bin/hap.py",
+                                  "/opt/hap.py-v0.3.0-pre/bin/hap.py",
                                   "/illumina/development/haplocompare/hc-dev-builds/haplocompare-v0.3.0/bin/hap.py"])
     DEPS["rtgtools"] = find("rtgtools",
                             env_var="RTGTOOLS",
