@@ -1,0 +1,148 @@
+body {
+    font: 16px sans-serif;
+}
+
+h1 {
+    margin-top: 1ex;
+    margin-bottom: 1.5ex;
+}
+
+h2 {
+    margin-top: 1ex;
+    margin-bottom: 1ex;
+}
+
+h3 {
+    margin-top: 1ex;
+    margin-bottom: 1ex;
+}
+
+.centered {
+    width: 100%;
+    text-align: center;
+}
+
+svg text {
+    -webkit-user-select: none;
+       -moz-user-select: none;
+        -ms-user-select: none;
+            user-select: none;
+}
+svg text::selection {
+    background: none;
+}
+
+.axis path,
+.axis line {
+    fill: none;
+    stroke: #000;
+    stroke-width: 2px;
+    shape-rendering: crispEdges;
+}
+
+.axis .label {
+    font: 12px sans-serif;
+    font-weight: bold;
+}
+
+rect.zoom {
+    stroke: steelblue;
+    fill-opacity: 0.5;
+    background-color: #c5d7e3;
+    fill: #c5d7e3;
+}
+
+.dot {
+    stroke: #000;
+}
+
+button {
+}
+
+button.showhide {
+    color: #FFF;
+    background: #aaa;
+    margin-top: 15px;
+    padding: 2px 10px;
+    font-size: .7em;
+}
+
+button:hover.showhide {
+    background: #999;
+}
+
+.highlighted_metric {
+    font-weight: bold;
+    color: #406882;
+}
+
+th.highlighted_metric {
+}
+
+/*
+doesn't look all that great
+
+.autoscroll_x {
+    max-width: 1000px;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+*/
+/*
+
+Makes things fit, but also less readable
+
+.tinytext {
+    font-size: 9.5px;
+}
+*/
+
+table.table > tbody > tr td.highlighted_metric {
+    background-color: #fafafa;
+}
+
+table.table > tbody > tr td.highlighted_metric_r {
+    background-color: #fffafa;
+}
+
+table.table-striped > tbody > tr:nth-child(2n) td.highlighted_metric {
+    background-color: #fafafa;
+}
+
+table.table-striped > tbody > tr:nth-child(2n+1) td.highlighted_metric {
+    background-color: #e0e0e0;
+}
+
+.collapsed {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+input[type="text"] {
+    display: block;
+    margin-top: 10px;
+    width: 100%;
+    font-family: sans-serif;
+    font-size: 18px;
+    box-shadow: none;
+    border-radius: none;
+}
+
+input[type="text"]:focus {
+    outline: none;
+}
+
+input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-bottom: solid 1px #ddd;
+    transition: border 0.2s;
+}
+
+input[type="text"]:focus,
+input[type="text"].focus {
+    border-bottom: solid 1px #aaa;
+}
