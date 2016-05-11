@@ -68,13 +68,13 @@ TRUTHSETS["NA12878-GiaB-2.19-hg19"] = Truthset("NA12878-GiaB-2.19-hg19",
 TRUTHSETS["NA12878-PG-9.0.0-hg19"] = Truthset("NA12878-PG-9.0.0-hg19",
                                               find("PG_NA12878_VCF",
                                                    env_var="PG_NA12878_VCF",
-                                                   to_try=["/work/pg-9.0.0/NA12878.vcf.gz",
+                                                   to_try=["/work/pg_9.0.0/NA12878.vcf.gz",
                                                            "/illumina/development/precise/prec-data/PG-7.1-KF/"
                                                            "platinum_NA12878_v7.1.0-kmer_filtered.vcf.gz"],
                                                    must_be_executable=False),
                                               find("PG_NA12878_BED",
                                                    env_var="PG_NA12878_BED",
-                                                   to_try=["/work/pg-9.0.0/ConfidentRegions.bed.gz",
+                                                   to_try=["/work/pg_9.0.0/ConfidentRegions.bed.gz",
                                                            "/illumina/development/precise/prec-data/PG-7.1-KF"
                                                            "/platinum_all.chr.bed.gz"],
                                                    must_be_executable=False))

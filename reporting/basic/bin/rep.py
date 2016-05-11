@@ -33,7 +33,8 @@ def main():
     parser.add_argument("input", help="Input file in GA4GH metrics format", nargs="*")
 
     parser.add_argument("-o", "--output", help="Output file name for reports, e.g. 'report' to write "
-                                               "report.html")
+                                               "report.html",
+                        required=True)
 
     parser.add_argument("-m", "--comparison-method", default="default", dest="comparison_method",
                         help="The comparison method that was used.")
@@ -95,6 +96,9 @@ def main():
     template_vars = {
         "content": report.make_report(metrics)
     }
+
+    if not metrics:
+        raise Exception("No inputs specified.")
 
     template = env.get_template("report.jinja2.html")
     template.stream(**template_vars).dump(args.output)

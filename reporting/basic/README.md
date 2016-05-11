@@ -1,6 +1,9 @@
-# GA4GH Reporting
+# GA4GH Benchmarking App
 
-This is a set of scripts to produce variant benchmarking reports.
+This is a proposal for an app to implement a benchmarking workflow based on the recommendations by the
+GA4GH benchmarking group.
+
+A more detailed description of this work is available at [https://github.com/ga4gh/benchmarking-tools]()
 
 # Input / Output
 
