@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Benchmarking Report</title>
+
+    <!-- inlined scripts and CSS -->
+    <script>
+        {% include "lib/d3/d3.min.js" %}
+    </script>
+    <script>
+        {% include "helpers.js" %}
+    </script>
+    <script>
+        {% include "roc.js" %}
+    </script>
+
+    <style>
+        {% include "lib/bijou/css/bijou.min.css" %}
+    </style>
+    <style>
+        {% include "report.css" %}
+    </style>
+</head>
+<body>
+<div class="container">
+    {{ content }}
+</div>
+</body>
+</html>

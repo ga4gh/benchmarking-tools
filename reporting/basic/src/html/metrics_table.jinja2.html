@@ -1,0 +1,303 @@
+<div>
+    <div class='row'>
+        <div class='span three'>
+            <button id="table_{{ table_name }}_expand"
+                    class='button showhide small'>Show additional metrics
+            </button>
+        </div>
+        <div class='span two'>
+            <button id="table_{{ table_name }}_allcalls"
+                    class='button showhide small'>Show ALL calls
+            </button>
+        </div>
+        <div class='span five'>
+            <input id="table_{{ table_name }}_search" type="text" placeholder="search"/>
+        </div>
+    </div>
+    <div class='row autoscroll_x'>
+        <table id="table_{{ table_name }}" class="table">
+        </table>
+    </div>
+</div>
+<script>
+    onLoad(function () {
+        /** numeric comparator */
+        function numeric(field, x, y) {
+            return y[field] - x[field];
+        }
+
+        /** numeric comparator, reversed */
+        function numeric_rev(field, x, y) {
+            return x[field] - y[field];
+        }
+
+        var data = JSON.parse({{ data }});
+        var columns = [
+            {
+                field: "method",
+                header: "Method",
+            },
+            {
+                field: "comparisonmethod",
+                header: "Comparison"
+            },
+            {
+                field: "filter",
+                header: "Filtering",
+                'class': "pass_collapse"
+            },
+            {
+                field: "subset",
+                header: "Subset",
+                'class': "collapse collapsed"
+            },
+            {
+                field: "subtype",
+                header: "Subtype",
+                'class': "collapse collapsed"
+            },
+            {
+                field: "METRIC.Recall",
+                header: "Recall",
+                format: d3.format(".2%"),
+                'class': "highlighted_metric",
+                sort: numeric.bind(undefined, "METRIC.Recall")
+            },
+            {
+                field: "METRIC.Precision",
+                header: "Precision",
+                format: d3.format(".2%"),
+                'class': "highlighted_metric",
+                sort: numeric.bind(undefined, "METRIC.Precision")
+            },
+            {
+                field: "METRIC.Frac_NA",
+                header: "Frac. NA", format: d3.format(".2%"),
+                'class': "highlighted_metric",
+                sort: numeric_rev.bind(undefined, "METRIC.Frac_NA")
+            },
+            {
+                field: "METRIC.F1_Score",
+                header: "F-Score",
+                format: d3.format(".3f"),
+                'class': "highlighted_metric_r",
+                 sort: numeric.bind(undefined, "METRIC.F1_Score")
+            },
+            {
+                field: "TRUTH.TOTAL",
+                header: "#TRUTH",
+                format: d3.format("d"),
+                'class': "collapse collapsed",
+                sort: numeric.bind(undefined, "TRUTH.TOTAL")
+            },
+            {
+                field: "QUERY.TOTAL",
+                header: "#QUERY",
+                format: d3.format("d"),
+                sort: numeric.bind(undefined, "QUERY.TOTAL")
+            },
+            {
+                field: "TRUTH.TP",
+                header: "TP",
+                format: d3.format("d"),
+                sort: numeric.bind(undefined, "TRUTH.TP")
+            },
+            {
+                field: "TRUTH.FN",
+                header: "FN",
+                format: d3.format("d"),
+                sort: numeric_rev.bind(undefined, "TRUTH.FN")
+            },
+            {
+                field: "QUERY.FP",
+                header: "FP",
+                format: d3.format("d"),
+                sort: numeric_rev.bind(undefined, "QUERY.FP")
+            },
+            {
+                field: "FP.gt",
+                header: "GT Mismatches",
+                format: d3.format("d"),
+                'class': "collapse collapsed",
+                sort: numeric_rev.bind(undefined, "FP.gt")
+            },
+            {
+                field: "FP.al",
+                header: "Allele Mismatches",
+                format: d3.format("d"),
+                'class': "collapse collapsed",
+                sort: numeric_rev.bind(undefined, "FP.gt")
+            },
+            {
+                field: "QUERY.UNK",
+                header: "UNK",
+                format: d3.format("d"),
+                'class': "collapse collapsed",
+                sort: numeric_rev.bind(undefined, "QUERY.UNK")
+            }
+        ];
+
+        var filters_seen = {};
+        data.forEach(function (d) {
+            filters_seen[d["filter"]] = 1;
+        });
+
+        var tbl = d3.select("#table_{{ table_name }}");
+        var tbl_headers = tbl.append("thead").append("tr").selectAll("th")
+                .data(columns).enter()
+                .append("th")
+                .attr("class", function (d) {
+                    return d["class"];
+                })
+                .text(function (d) {
+                    return d.header;
+                });
+
+        var tbl_rows = tbl.append("tbody").selectAll("tr")
+                .data(data).enter()
+                .append("tr");
+        tbl_rows.selectAll("td")
+                .data(columns).enter()
+                .append("td")
+                .attr("class", function (d) {
+                    return d["class"];
+                })
+                .text(function (d) {
+                    var data_item = d3.select(this.parentNode).datum();
+                    var val = data_item[d.field];
+                    if (d.format !== undefined) {
+                        if (isNaN(val)) {
+                            return "(n/a)";
+                        }
+                        else {
+                            return d.format(val);
+                        }
+                    } else {
+                        return val;
+                    }
+                });
+
+        tbl_headers.on("click", function(d) {
+            if(d.sort) {
+                tbl_rows.sort(d.sort);
+            }
+            // &darr;
+        });
+
+
+        /** expand / collapse button */
+        var addmetrics_button = d3.select("#table_{{ table_name }}_expand").on("click", function () {
+            updateButton(addmetrics_button, !buttonState(addmetrics_button));
+            updateVisibility();
+        });
+
+        /** expand / collapse all calls button */
+        var allcalls_button = d3.select("#table_{{ table_name }}_allcalls").on("click", function () {
+            updateButton(allcalls_button, !buttonState(allcalls_button));
+            updateVisibility();
+        });
+
+        /** search box */
+        var searchbox = d3.select("#table_{{ table_name }}_search")
+                .attr("placeholder", "Filter Rows")
+                .on("keyup", function () {
+                    updateVisibility();
+                });
+
+        /** don't hide things when there is only one kind of filter */
+        if (Object.keys(filters_seen).length > 1) {
+            allcalls_button.style("visibility", "visible");
+            buttonState(allcalls_button, false);
+        } else {
+            allcalls_button.style("visibility", "hidden");
+            buttonState(allcalls_button, true);
+        }
+
+        updateVisibility();
+
+        /** show / hide buttons */
+        function buttonState(b) {
+            return b.text().indexOf("Show") < 0;
+        }
+
+        function updateButton(b, state) {
+            var bstate = buttonState(b);
+            if (state == bstate) {
+                return;
+            }
+            var btext = b.text();
+            if (!state) {
+                b.text(btext.replace("Hide", "Show"));
+            } else {
+                b.text(btext.replace("Show", "Hide"));
+            }
+        }
+
+        /** show / hide rows according to filtering */
+        function updateVisibility() {
+            var additional_metrics = buttonState(addmetrics_button);
+
+            tbl.selectAll(".pass_collapse").classed("collapsed", false);
+            
+            /** additional metrics also hide columns, handle this separately from filtering below */
+            if (additional_metrics) {
+                tbl.selectAll(".collapse").classed("collapsed", false);
+                tbl.classed("tinytext", true);
+            } else {
+                tbl.selectAll(".collapse").classed("collapsed", true);
+                tbl.classed("tinytext", false);
+            }
+
+            var allcalls = buttonState(allcalls_button);
+            var searchTerm = searchbox.node().value;
+            if (!allcalls) {
+                tbl.selectAll(".pass_collapse").classed("collapsed", true);
+            }
+
+            var terms = searchTerm.toLowerCase().split(/ /).filter(function(d) { return d !== ""; });
+            var row = tbl.selectAll("tbody tr");
+            row.classed("hidden", true);
+            row.filter(function (r) {
+                var res = false;
+                var columns = Object.keys(r);
+
+                if (!additional_metrics && (r["subset"] != "*" || r["subtype"] != "*")) {
+                    return false;
+                }
+
+                if (!allcalls && r["filter"] != "PASS") {
+                    return false;
+                }
+
+                var terms_matched = 0;
+                for (var i = 0; i < terms.length; ++i) {
+                    var t = terms[i];
+                    var column_value;
+
+                    if (t.indexOf(":") >= 0) {
+                        var x = t.split(":");
+
+                        if (x.length >= 2) {
+                            var col = x[0];
+                            var sx = x.slice(1).join(":");
+                            column_value = "" + r[col];
+                            column_value = column_value.toLowerCase();
+                            if (column_value.indexOf(sx) >= 0) {
+                                terms_matched += 1;
+                            }
+                        }
+                    } else {
+                        for (var j = 0; j < columns.length; ++j) {
+                            column_value = "" + r[columns[j]];
+                            column_value = column_value.toLowerCase();
+                            if (column_value.indexOf(t) >= 0) {
+                                terms_matched += 1;
+                            }
+                        }
+                    }
+                }
+                return terms_matched == terms.length;
+            }).classed("hidden", false);
+        }
+    });
+</script>
