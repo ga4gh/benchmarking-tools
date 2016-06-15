@@ -63,7 +63,8 @@ output in the BD format field:
 ```
 
 The mapping of combinations of BK values to BD may vary for different comparison
-types. Here are two examples.
+types. Here are examples corresponding to the
+[three standard comparison methods](../standards/GA4GHBenchmarkingPerformanceMetricsDefinitions.md).
 
 ### Loose variant comparison
 
@@ -74,6 +75,15 @@ truth.
 |:--------:|:--------------:|:--------------:|
 |    .     |       FN       |       FP       |
 | lm/am/gm |       TP       |       TP       |
+
+### Allele Comparison
+
+Test allele-level concordance between truth and query.
+
+| **BK** |     **BD (Truth)**     |     **BD (Query)**     |
+|:------:|:----------------------:|:----------------------:|
+|  ./lm  |           FN           |           FP           |
+| am/gm  |           TP           |           TP           |
 
 ### Genotype Comparison
 
