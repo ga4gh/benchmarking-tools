@@ -20,7 +20,7 @@ func_cds	./FunctionalRegions/refseq_union_cds.sort.bed.gz	coding exons from RefS
 lowcmp_SimpleRepeat_homopolymer_gt10	./LowComplexity/SimpleRepeat_homopolymer_gt10.bed.gz	Homopolymers >10bp in length
 lowcmp_SimpleRepeat_triTR_11to50	./LowComplexity/SimpleRepeat_triTR_11to50.bed.gz	Exact 3bp tandem repeats 11-50bp in length
 lowcmp_Human_Full_Genome_TRDB_hg19_150331_TRgt6_lt51bp_gt95identity_merged	./LowComplexity/Human_Full_Genome_TRDB_hg19_150331_TRgt6_lt51bp_gt95identity_merged.bed.gz	Tandem repeats with >6bp unit size and <51bp in length and >95% identity
-lowcmp_Human_Full_Genome_TRDB_hg19_150331_all_merged	./LowComplexity/Human_Full_Genome_TRDB_hg19_150331_all_merged.bed.gz
+lowcmp_Human_Full_Genome_TRDB_hg19_150331_all_merged	./LowComplexity/Human_Full_Genome_TRDB_hg19_150331_all_merged.bed.gz	All tandem repeats from TRDB with adjacent repeats merged
 lowcmp_SimpleRepeat_quadTR_11to50	./LowComplexity/SimpleRepeat_quadTR_11to50.bed.gz	Exact 4bp tandem repeats 11-50bp in length
 lowcmp_Human_Full_Genome_TRDB_hg19_150331_TRlt7_gt200bp_gt95identity_merged	./LowComplexity/Human_Full_Genome_TRDB_hg19_150331_TRlt7_gt200bp_gt95identity_merged.bed.gz	Tandem repeats with 1-6bp unit size and >200bp in length and >95% identity
 lowcmp_Human_Full_Genome_TRDB_hg19_150331_TRlt7_lt101bp_gt95identity_merged	./LowComplexity/Human_Full_Genome_TRDB_hg19_150331_TRlt7_lt101bp_gt95identity_merged.bed.gz	Tandem repeats with 1-6bp unit size and <101bp in length and >95% identity
