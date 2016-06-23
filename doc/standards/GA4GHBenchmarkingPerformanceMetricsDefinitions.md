@@ -158,7 +158,7 @@ A description of how different combinations of Truth and Query genotypes are cou
 
 **Recall (METRIC.Recall)** (aka, True Positive Rate or Sensitivity): TRUTH.TP/(TRUTH.TP+TRUTH.FN)
 
-**Precision (METRIC.Precision)** (aka, Positive Predictive Value): TRUTH.TP/(TRUTH.TP+QUERY.FP)
+**Precision (METRIC.Precision)** (aka, Positive Predictive Value): QUERY.TP/(QUERY.TP+QUERY.FP)
 
 **Negative Predictive Value:** QUERY.FP/(QUERY.FP+TRUTH.FN)
 
