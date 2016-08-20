@@ -11,6 +11,7 @@
 import os
 import csv
 import math
+import gzip
 
 
 class Metrics:
@@ -201,7 +202,10 @@ def read_qfy_csv(files,
         roc_metrics = ["METRIC.Recall", "METRIC.Precision"]
 
     for csv_file_name in files:
-        csvfile = open(csv_file_name, 'rb')
+        if csv_file_name.endswith(".gz"):
+            csvfile = gzip.open(csv_file_name, "rb")
+        else:
+            csvfile = open(csv_file_name, 'rb')
         try:
             dialect = csv.Sniffer().sniff(csvfile.read(8192))
             csvfile.seek(0)

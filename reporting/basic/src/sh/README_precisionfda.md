@@ -30,14 +30,3 @@ variants only in that region.
    MNP record. The partial credit attempts to normalize these representational differences before
    variant comparison, such that the counts of TPs / FPs / FNs will be more comparable.
 
-# TODO List
-
-*  Improved integration of vcfeval: enable partial-credit counting with vcfeval and improve ROC
-   postprocessing
-
-*  Improved counting: Currently, we count individual VCF records. Due to differences
-   in variant representation between variant callers, this can make counts difficult to
-   compare. A way to improve this is to count on a "super-locus-level", i.e. to count
-   close-by variants together as one.
-
-*  More metrics / plots (AuC, ROC curves)
