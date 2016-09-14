@@ -38,10 +38,10 @@ hap.py NA12878.vcf.gz query.vcf.gz -f ConfidentRegions.bed.gz -o benchmarking-ou
 
 Raw data from these sequencing runs are available at the European Nucleotide Archive under the following accession numbers:
 
-* PCR-free pedigree (@50x): [http://www.ebi.ac.uk/ena/data/view/ERP001960](ERP001960)
-* PCR-free Trio and one technical replicate (@200x): [http://www.ebi.ac.uk/ena/data/view/ERP001775](ERP001775)
+* PCR-free pedigree (@50x): [ERP001960](http://www.ebi.ac.uk/ena/data/view/ERP001960)
+* PCR-free Trio and one technical replicate (@200x): [ERP001775](http://www.ebi.ac.uk/ena/data/view/ERP001775)
 
-The raw data are also available from the Platinum Genomes project in [https://basespace.illumina.com/s/Tty7T2ppH3Tr](BaseSpace Sequence Hub).
+The raw data are also available from the Platinum Genomes project in [BaseSpace Sequence Hub](https://basespace.illumina.com/s/Tty7T2ppH3Tr).
 For the FASTQ files, please navigate to the "Samples" section.
 
 
