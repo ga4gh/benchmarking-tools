@@ -12,9 +12,9 @@ Please cite this manuscript in publications and other public usage of Platinum G
 If you have any questions, please contact [platinumgenomes@illumina.com](mailto:platinumgenomes@illumina.com).
 Please note that while Platinum Genomes are freely available, Illumina does not offer technical support for these resources.
 
-# Truthset Download
+# High-confidence VCF and BED Download
 
-The VCFs with the high-confidence calls can be obtained as follows:
+The latest VCF and BED files with the high-confidence calls and regions can be obtained as follows:
 
 * From the Illumina FTP site: [ftp://ussd-ftp.illumina.com/2016-1.0/](ftp://ussd-ftp.illumina.com/2016-1.0/)
 
@@ -24,12 +24,12 @@ The VCFs with the high-confidence calls can be obtained as follows:
 
 # Benchmarking Recipe
 
-Using [http://github.com/Illumina/hap.py](hap.py), a query VCF file for hg38 can be compared to this gold standard dataset as follows:
+Using [hap.py](http://github.com/Illumina/hap.py), a query VCF file for hg38 can be compared to this gold standard dataset as follows:
 
 ```bash
 wget ftp://platgene_ro@ussd-ftp.illumina.com/2016-1.0/hg38/small_variants/NA12878/NA12878.vcf.gz
 wget ftp://platgene_ro@ussd-ftp.illumina.com/2016-1.0/hg38/small_variants/NA12878/NA12878.vcf.gz.tbi
-ftp://platgene_ro@ussd-ftp.illumina.com/2016-1.0/hg38/small_variants/ConfidentRegions.bed.gz
+wget ftp://platgene_ro@ussd-ftp.illumina.com/2016-1.0/hg38/small_variants/ConfidentRegions.bed.gz
 
 hap.py NA12878.vcf.gz query.vcf.gz -f ConfidentRegions.bed.gz -o benchmarking-output
 ```
