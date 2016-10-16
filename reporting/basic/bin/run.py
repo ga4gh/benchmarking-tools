@@ -21,7 +21,7 @@ sys.path.append(os.path.abspath(os.path.join(LIBDIR)))
 
 from deps import DEPS
 from deps.happy import happy
-from deps.truthsets import TRUTHSETS, Truthset
+from deps.truthsets import Truthset
 
 import report
 import report.metrics
@@ -42,15 +42,17 @@ def main():
     parser.add_argument("-O", "--keep-results", help="Specify a folder in which to keep the hap.py results.",
                         dest="keep_results", default=None)
 
-    parser.add_argument("-t", "--truthsets", help="Truthsets to use in comma separated list (allowed: %s" %
-                                                  str(TRUTHSETS.keys()),
-                        default=",".join(TRUTHSETS.keys()))
-
     parser.add_argument("-e", "--engine", help="Comparison engine to use (xcmp / vcfeval)",
                         default="xcmp", choices=["xcmp", "vcfeval"])
 
-    parser.add_argument("--custom-truthset", help="Add custom truthsets in this format: 'name:vcf:bed'",
+    parser.add_argument("--truthset", dest="truthset",
+                        help="Add truthsets in this format: 'name:vcf:bed'",
                         default=[], action="append")
+
+    parser.add_argument("--stratification", dest="stratification",
+            help="Use a list of stratification regions (this should point to the TSV file). "
+                 "Prefix with 'fixchr:' to add chr prefix to chromosome names.",
+                        default=None)
 
     parser.add_argument("--roc", help="ROC feature to use", dest="roc", default="QUAL")
     parser.add_argument("--ignore-filters", help="Filters to ignore (e.g. --ignore-filters MQ,lowQual).",
@@ -84,13 +86,12 @@ def main():
     if args.keep_results and not os.path.isdir(args.keep_results):
         raise Exception("Output folder %s does not exist." % args.keep_results)
 
-    for x in args.custom_truthset:
+    truthsets = []
+    for x in args.truthset:
         xs = x.split(":", 2)
         if len(xs) != 3:
             raise Exception("Invalid custom truthset: %s" % x)
-        TRUTHSETS[xs[0]] = Truthset(xs[0], xs[1], xs[2])
-
-    args.truthsets = [TRUTHSETS[ts] for ts in args.truthsets.split(",")]
+        truthsets.append(Truthset(xs[0], xs[1], xs[2]))
 
     resultlist = []
     metrics = []
@@ -110,9 +111,19 @@ def main():
             if methodname.endswith(".bcf"):
                 methodname = methodname[:-4]
 
-            for ts in args.truthsets:
+            for ts in truthsets:
                 logging.info("Comparing %s against %s" % (query, ts.name))
                 # run with PG
+                extra_args = args.happy_extra
+                if extra_args is None:
+                    extra_args = ""
+
+                if args.stratification:
+                    if args.stratification.startswith("fixchr:"):
+                        extra_args += " --stratification-fixchr"
+                        args.stratification = args.stratification[len("fixchr:"):]
+                    extra_args += " --stratification %s" % args.stratification
+
                 happyfiles = happy(query,
                                    truth=ts.vcf,
                                    truth_conf=ts.bed,
@@ -120,7 +131,7 @@ def main():
                                    roc_filters=args.roc_filters,
                                    engine=args.engine,
                                    ref=args.reference,
-                                   extra=args.happy_extra,
+                                   extra=extra_args,
                                    output_folder=args.keep_results,
                                    output_prefix=args.engine + "_" + methodname)
                 resultlist += happyfiles
@@ -128,8 +139,7 @@ def main():
                 results_for_report.append({
                     "method": methodname,
                     "cmethod": ts.name + "-" + args.engine,
-                    "files": [r for r in happyfiles if r.endswith(".csv") and
-                              ("roc.Locations." in r or r.endswith(".extended.csv"))]
+                    "files": [r for r in happyfiles if r.endswith(".roc.all.csv.gz")]
                 })
 
         if args.keep_results:

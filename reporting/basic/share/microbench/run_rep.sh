@@ -5,6 +5,6 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-python ${DIR}/../../bin/rep.py -o test-single.html -l ${DIR}/results/rep.tsv
+python ${DIR}/../../bin/rep.py -o ${DIR}/output/test_single.html -l ${DIR}/results/test.tsv
 
 exit $?

@@ -23,21 +23,22 @@ There are two scripts in the [bin] folder:
 * **run.py** : run hap.py and produce a report
 
 ```bash
-python run.py -o test.html test.vcf.gz
+python run.py -o test.html test.vcf.gz --truthset GOLD:gold.vcf.gz:gold.bed.gz
 ```
 
-* **rep.py** : report from hap.py results
+* **rep.py** : make a report from hap.py results
 
 ```bash
-python rep.py -o test.html result.extended.csv
+python rep.py -m test-comparison -o test.html result.roc.all.vcf.gz
 ```
 
 See also [share/microbench](share/microbench) for a demo.
 
 # Dependencies
 
-* hap.py v0.3.0+ -- [https://github.com/Illumina/hap.py/tree/dev-0.3](https://github.com/Illumina/hap.py/tree/dev-0.3)
+* hap.py v0.3.1+ -- [https://github.com/Illumina/hap.py/tree/dev-0.3](https://github.com/Illumina/hap.py/tree/dev-0.3)
 * rtgtools vcfeval in the GA4GH version: [https://github.com/RealTimeGenomics/rtg-tools/tree/ga4gh-test](https://github.com/RealTimeGenomics/rtg-tools/tree/ga4gh-test)
+  hap.py should me compiled with vcfeval support, which downloads the correct version automatically
 * A truth set, e.g. Platinum Genomes or Genome in a Bottle
 * Python packages in [requirements.txt]:
     - jinja2

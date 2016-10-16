@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding=utf-8
 #
-# Dependency finder for hap.py, vcfeval, resources
+# Dependency finder for hap.py, resources
 #
 # Author:
 #
@@ -17,6 +17,7 @@ DEPS = {}
 
 def _which(program, must_be_executable=True, is_dir=False):
     """ see if we can find an executable in PATH
+    based on
     http://stackoverflow.com/questions/377017/test-if-executable-exists-in-python
     """
 
@@ -79,25 +80,11 @@ def setup():
     DEPS["hap.py"] = find("hap.py",
                           env_var="HAPPY",
                           to_try=["/opt/hap.py/bin/hap.py",
-                                  "/opt/hap.py-v0.3.0-pre/bin/hap.py",
-                                  "/illumina/development/haplocompare/hc-dev-builds/haplocompare-v0.3.0/bin/hap.py"])
-    DEPS["rtgtools"] = find("rtgtools",
-                            env_var="RTGTOOLS",
-                            to_try=["/opt/rtg-tools-3.6-dev-2365fac/rtg",
-                                    "/illumina/thirdparty/rtgtools/rtg-tools-3.6-dev-2365fac/rtg"])
+                                  "/home/peter/workspace/hap.py-build/bin/hap.py"])
     DEPS["hg19"] = find("hg19",
                         env_var="HG19",
                         to_try=["/work/hg19.fa",
-                                "/illumina/development/Isas/Genomes/Homo_sapiens/UCSC/hg19/Sequence/WholeGenomeFasta/genome.fa",
-                                "~/workspace/human_genome/hg19.fa"],
+                                "/home/peter/workspace/human_genome/hg19.fa"],
                         must_be_executable=False)
-    DEPS["hg19.sdf"] = find("hg19.sdf",
-                            env_var="HG19_SDF",
-                            to_try=["/work/hg19.sdf",
-                                    "/illumina/thirdparty/rtgtools/hg19.sdf",
-                                    "~/workspace/human_genome/hg19.sdf"],
-                            must_be_executable=False,
-                            is_dir=True)
-
 
 setup()
