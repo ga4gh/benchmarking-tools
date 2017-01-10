@@ -1,8 +1,7 @@
 # Benchmarking Tools and Standards
 
-This repository contains specifications for implementing benchmarking tools.
-We also provide links to our reference benchmarking engines and their
-implementations.
+This is the repository for the work of the GA4GH Benchmarking Team, which is developing standardized definitions for genome variant calling performance metrics, as well as reference implementations of tools to calculate these performance metrics.  
+We also provide links to our reference benchmarking engines and their implementations, as well as to benchmarking datasets.
 
 ** Note: This is work in progress. **
 
@@ -25,4 +24,4 @@ outputs from comparison tools.
 
 # Benchmarking resources
 
-In [doc/resources/](doc/resources/), we provide files useful in the benchmarking process.  Currently, this includes standardized bed files describing potentially difficult regions for performance stratification.
+In [doc/resources/](doc/resources/), we provide files useful in the benchmarking process.  Currently, this includes links to benchmarking calls and datasets as well as standardized bed files describing potentially difficult regions for performance stratification.
