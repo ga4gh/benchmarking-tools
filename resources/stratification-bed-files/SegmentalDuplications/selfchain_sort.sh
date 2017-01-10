@@ -20,3 +20,8 @@ gunzip -c /Users/jzook/Downloads/hg19_self_chain_split_all.bed.gz | awk '{if($3-
 #146352960
 gunzip -c /Users/jzook/Downloads/hg19_self_chain_split_all.bed.gz | awk '{if($3-$2>10000) print}' | /Applications/bioinfo/tabix-0.2.6/bgzip -c > /Users/jzook/Downloads/hg19_self_chain_split_withalts_gt10k.bed.gz
 
+#Make bed with all seg dups and its complement
+/Applications/bioinfo/bedtools2/bin/multiIntersectBed -i /Users/jzook/Downloads/work/bed_files/SegmentalDuplications/hg19_self_chain_split_withalts_gt10k.bed.gz /Users/jzook/Downloads/work/bed_files/SegmentalDuplications/mm-2-merged.bed.gz /Users/jzook/Downloads/work/bed_files/SegmentalDuplications/hg19_self_chain_split_both.bed.gz | /Applications/bioinfo/bedtools2/bin/mergeBed -i stdin | /Applications/bioinfo/tabix/bgzip -c >  /Users/jzook/Downloads/work/bed_files/SegmentalDuplications/segdupall.bed.gz
+
+
+/Applications/bioinfo/bedtools2/bin/subtractBed -a /Applications/bioinfo/nist-integration-v3.1/resources/human.b37.genome.bed -b  /Users/jzook/Downloads/work/bed_files/SegmentalDuplications/segdupall.bed.gz | /Applications/bioinfo/tabix/bgzip -c >  /Users/jzook/Downloads/work/bed_files/SegmentalDuplications/notinsegdupall.bed.gz

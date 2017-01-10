@@ -3,7 +3,7 @@ Segmental duplication and decoy files from the Global Alliance for Genomics and 
 These files are intended as standard resource of bed files for use in stratifying true positive, false positive, and false negative variant calls into whether they are in segmental duplications or in regions with homology to decoy sequences.  
 
 SEGMENTAL DUPLICATIONS FILES:
-These files were created by Kevin Jacobs and are currently in alpha form.  More detailed information and/or revisions to the bed file will follow.
+These files were created by Kevin Jacobs using the script make_self_chain.py.
 
 hg19_self_chain_split.sort.bed.gz is sorted in numerical chromosome order with only 1-22, X, Y, and MT
 
