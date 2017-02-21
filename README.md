@@ -24,4 +24,4 @@ outputs from comparison tools.
 
 # Benchmarking resources
 
-In [doc/resources/](doc/resources/), we provide files useful in the benchmarking process.  Currently, this includes links to benchmarking calls and datasets as well as standardized bed files describing potentially difficult regions for performance stratification.
+In [resources/](resources/), we provide files useful in the benchmarking process.  Currently, this includes links to benchmarking calls and datasets as well as standardized bed files describing potentially difficult regions for performance stratification.
