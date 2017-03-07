@@ -1,0 +1,16 @@
+
+Input Data
+Files              : hg38.chr21.fa
+Format             : FASTA
+Type               : DNA
+Number of sequences: 1
+Total residues     : 46709983
+Minimum length     : 46709983
+Maximum length     : 46709983
+
+Output Data
+SDF-ID             : 58fe2c2e-757a-42d8-801e-edaec49a062d
+Number of sequences: 1
+Total residues     : 46709983
+Minimum length     : 46709983
+Maximum length     : 46709983

@@ -1,0 +1,83 @@
+2017-03-07 11:19:44 serial = 27182818284
+2017-03-07 11:19:44 email = anon
+2017-03-07 11:19:44 RTG version = RTG Tools 3.7.1 / Core eb13bbb (2017-03-03)
+2017-03-07 11:19:44 awt.toolkit = sun.lwawt.macosx.LWCToolkit
+2017-03-07 11:19:44 file.encoding = UTF-8
+2017-03-07 11:19:44 file.encoding.pkg = sun.io
+2017-03-07 11:19:44 file.separator = /
+2017-03-07 11:19:44 ftp.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
+2017-03-07 11:19:44 gopherProxySet = false
+2017-03-07 11:19:44 host.name = ukch-ofclt3520.chuk.illumina.com
+2017-03-07 11:19:44 http.nonProxyHosts = local|*.local|169.254/16|*.169.254/16
+2017-03-07 11:19:44 java.awt.graphicsenv = sun.awt.CGraphicsEnvironment
+2017-03-07 11:19:44 java.awt.printerjob = sun.lwawt.macosx.CPrinterJob
+2017-03-07 11:19:44 java.class.path = /Users/pkrusche/workspace/rtg-install/rtg-tools-3.7.1-eb13bbb/RTG.jar
+2017-03-07 11:19:44 java.class.version = 52.0
+2017-03-07 11:19:44 java.endorsed.dirs = /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/endorsed
+2017-03-07 11:19:44 java.ext.dirs = /Users/pkrusche/Library/Java/Extensions:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/ext:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java
+2017-03-07 11:19:44 java.home = /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre
+2017-03-07 11:19:44 java.io.tmpdir = /var/folders/2j/s70wxb4x60l2l60zcbgdkvg800376c/T/
+2017-03-07 11:19:44 java.library.path = /Users/pkrusche/workspace/rtg-install/rtg-tools-3.7.1-eb13bbb
+2017-03-07 11:19:44 java.runtime.name = Java(TM) SE Runtime Environment
+2017-03-07 11:19:44 java.runtime.version = 1.8.0_121-b13
+2017-03-07 11:19:44 java.specification.name = Java Platform API Specification
+2017-03-07 11:19:44 java.specification.vendor = Oracle Corporation
+2017-03-07 11:19:44 java.specification.version = 1.8
+2017-03-07 11:19:44 java.vendor = Oracle Corporation
+2017-03-07 11:19:44 java.vendor.url = http://java.oracle.com/
+2017-03-07 11:19:44 java.vendor.url.bug = http://bugreport.sun.com/bugreport/
+2017-03-07 11:19:44 java.version = 1.8.0_121
+2017-03-07 11:19:44 java.vm.info = mixed mode
+2017-03-07 11:19:44 java.vm.name = Java HotSpot(TM) 64-Bit Server VM
+2017-03-07 11:19:44 java.vm.specification.name = Java Virtual Machine Specification
+2017-03-07 11:19:44 java.vm.specification.vendor = Oracle Corporation
+2017-03-07 11:19:44 java.vm.specification.version = 1.8
+2017-03-07 11:19:44 java.vm.vendor = Oracle Corporation
+2017-03-07 11:19:44 java.vm.version = 25.121-b13
+2017-03-07 11:19:44 lang.version = 1.8.0_121
+2017-03-07 11:19:44 line.separator = 
+
+2017-03-07 11:19:44 models.dir = /Users/pkrusche/workspace/rtg-install/rtg-tools-3.7.1-eb13bbb/models
+2017-03-07 11:19:44 os.arch = x86_64
+2017-03-07 11:19:44 os.freememory = 851894272
+2017-03-07 11:19:44 os.name = Mac OS X
+2017-03-07 11:19:44 os.totalmemory = 17179869184
+2017-03-07 11:19:44 os.version = 10.11.6
+2017-03-07 11:19:44 path.separator = :
+2017-03-07 11:19:44 processor.arch = x86_64
+2017-03-07 11:19:44 processor.count = 8
+2017-03-07 11:19:44 references.dir = /Users/pkrusche/workspace/rtg-install/rtg-tools-3.7.1-eb13bbb/references
+2017-03-07 11:19:44 runtime.freememory = 246671400
+2017-03-07 11:19:44 runtime.maxmemory = 13744734208
+2017-03-07 11:19:44 runtime.totalMemory = 257425408
+2017-03-07 11:19:44 socksNonProxyHosts = local|*.local|169.254/16|*.169.254/16
+2017-03-07 11:19:44 sun.arch.data.model = 64
+2017-03-07 11:19:44 sun.boot.class.path = /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/resources.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/rt.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/sunrsasign.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jsse.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jce.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/charsets.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib/jfr.jar:/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/classes
+2017-03-07 11:19:44 sun.boot.library.path = /Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/jre/lib
+2017-03-07 11:19:44 sun.cpu.endian = little
+2017-03-07 11:19:44 sun.cpu.isalist = 
+2017-03-07 11:19:44 sun.io.unicode.encoding = UnicodeBig
+2017-03-07 11:19:44 sun.java.command = /Users/pkrusche/workspace/rtg-install/rtg-tools-3.7.1-eb13bbb/RTG.jar format -o input/hg38.chr21.sdf input/hg38.chr21.fa
+2017-03-07 11:19:44 sun.java.launcher = SUN_STANDARD
+2017-03-07 11:19:44 sun.jnu.encoding = UTF-8
+2017-03-07 11:19:44 sun.management.compiler = HotSpot 64-Bit Tiered Compilers
+2017-03-07 11:19:44 sun.os.patch.level = unknown
+2017-03-07 11:19:44 talkback = true
+2017-03-07 11:19:44 user.country = US
+2017-03-07 11:19:44 user.dir = /Users/pkrusche/workspace/benchmarking-tools/reporting/basic/share/microbench
+2017-03-07 11:19:44 user.home = /Users/pkrusche
+2017-03-07 11:19:44 user.language = en
+2017-03-07 11:19:44 user.name = pkrusche
+2017-03-07 11:19:44 user.timezone = Europe/London
+2017-03-07 11:19:44 vendor = Oracle Corporation
+2017-03-07 11:19:44 gzipfix.enabled = true
+2017-03-07 11:19:44 Command line arguments: rtg format -o input/hg38.chr21.sdf input/hg38.chr21.fa
+2017-03-07 11:19:44 Run Id: f8d8124b-fe6d-4322-a4e9-bfabd8c9a279
+2017-03-07 11:19:44 Formatting FASTA data
+2017-03-07 11:19:44 Processing "input/hg38.chr21.fa"
+2017-03-07 11:19:45 Unexpected symbol "M" in sequence "chr21" replaced with "N".
+2017-03-07 11:19:45 Unexpected symbol "M" in sequence "chr21" replaced with "N".
+2017-03-07 11:19:45 Unexpected symbol "R" in sequence "chr21" replaced with "N".
+2017-03-07 11:19:46 Writing SDF-Id: 58fe2c2e-757a-42d8-801e-edaec49a062d
+2017-03-07 11:19:46 Referenced SDF-ID: 58fe2c2e-757a-42d8-801e-edaec49a062d Type: DNA Sequences: 1 Max-Length: 46709983 Min-Length: 46709983 Arm: UNKNOWN
+2017-03-07 11:19:46 Finished successfully in 1 s.

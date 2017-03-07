@@ -215,12 +215,10 @@ def read_qfy_csv(files,
         # remove extension
         if not method:
             tmethod = os.path.basename(csv_file_name)
-            if tmethod.endswith(".extended.csv"):
-                tmethod = tmethod.replace(".extended.csv", "")
-            if tmethod.endswith(".roc.Locations"):
-                tmethod = tmethod.replace(".roc.Locations", "")
-            if tmethod.endswith(".csv"):
-                tmethod = tmethod.replace(".csv", "")
+            tmethod = tmethod.replace(".gz", "")
+            tmethod = tmethod.replace(".csv", "")
+            tmethod = tmethod.replace(".extended.csv", "")
+            tmethod = tmethod.replace(".roc.Locations", "")
         else:
             tmethod = method
         key_list = ["Type", "Subtype", "Genotype", "Filter", "Subset", "QQ.Field"]
