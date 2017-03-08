@@ -406,6 +406,14 @@ if (PLOT === undefined) {
 
         var legend_start = width + 280;
 
+        svg.append("text")
+            .attr("x", legend_start)
+            .attr("dy", "0px")
+            .style("text-anchor", "end")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("Method");
+
         var legend = svg.selectAll(".legend")
             .data(color.domain())
             .enter().append("g")
@@ -413,7 +421,7 @@ if (PLOT === undefined) {
                 return "legend legend_" + d.replace(/[^A-Z0-9_]/gi, "_");
             })
             .attr("transform", function (d, i) {
-                return "translate(0," + i * 22 + ")";
+                return "translate(0," + ( i * 22 + 20 ) + ")";
             });
 
         legend.append("circle")
@@ -429,6 +437,14 @@ if (PLOT === undefined) {
                 return d;
             });
 
+        svg.append("text")
+            .attr("x", legend_start)
+            .attr("dy", "" + (color.domain().length * 22 + 30) + "px")
+            .style("text-anchor", "end")
+            .style("font-size", "12px")
+            .style("font-weight", "bold")
+            .text("Comparison Method");
+
         var cmlegend = svg.selectAll(".cmlegend")
             .data(shape.domain()).enter()
             .append("g")
@@ -436,7 +452,7 @@ if (PLOT === undefined) {
                 return "cmlegend cmlegend_" + d.replace(/[^A-Z0-9_]/gi, "_");
             })
             .attr("transform", function(d, i) {
-                return "translate(0," + ((i + color.domain().length) * 22 + 10) + ")";
+                return "translate(0," + ((i + color.domain().length) * 22 + 40) + ")";
             });
 
         cmlegend.append("path")

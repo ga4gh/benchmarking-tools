@@ -1,3 +1,4 @@
+{%- macro rocplot(roc_name, data) -%}
 <div class="centered"><div id="roc_{{ roc_name }}"></div></div>
 <script>
     setTimeout(function () {
@@ -5,3 +6,4 @@
         PLOT.roc("#roc_{{ roc_name }}", data);
     }, 100);
 </script>
+{%- endmacro -%}

@@ -14,17 +14,76 @@
 
 import sys
 import os
-import csv
+import json
 import argparse
 import jinja2
 import gzip
+import copy
 
+TEMPLATEDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src", "html"))
 LIBDIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "src", "python"))
 sys.path.append(os.path.abspath(os.path.join(LIBDIR)))
 
-import report
 import report.metrics
-from report.template import TEMPLATEDIR
+
+
+def extract_metrics(metrics):
+    """ Extract metrics and get data for tables.
+
+    This function takes a list of ROC values, and separates out the summary
+    values (which go into the tables) and the ROC datapoints (which are drawn).
+
+    :param metrics: a list of metrics as read by report.metrics
+    :return: { "snp/indel_table" : ... , "snp/indel_roc": ... }
+    """
+    data_subset = [d.to_dict() for d in metrics
+                   if d.type in ["SNP", "INDEL"] and
+                   d.filter in ["ALL", "PASS"] and
+                   d.genotype == "*"]
+
+    data_subset_snp = [d for d in data_subset if d["type"] == "SNP" and d["subtype"] == "*"]
+    data_subset_indel = [d for d in data_subset if d["type"] == "INDEL"]
+    data_subset_snp.sort(key=lambda x: x["subset"])
+
+    def _indel_type_order(t):
+        """ sort indel subtypes """
+        ordering = {
+            "D1_5": 1,
+            "I1_5": 2,
+            "C1_5": 3,
+            "D6_15": 4,
+            "I6_15": 5,
+            "C6_15": 6,
+            "D16_PLUS": 7,
+            "I16_PLUS": 8,
+            "C16_PLUS": 9
+        }
+        try:
+            return ordering[t]
+        except:
+            return 1000
+
+    data_subset_indel.sort(key=lambda x: [x["subset"], _indel_type_order(x["subtype"])])
+
+    data_subset_snp_roc = [copy.copy(d) for d in data_subset_snp if d["subtype"] == "*" and d["subset"] == "*"]
+    data_subset_indel_roc = [copy.copy(d) for d in data_subset_indel if d["subtype"] == "*" and d["subset"] == "*"]
+
+    # these just get turned into tables, so we don't need the ROC values
+    for d in data_subset_snp:
+        del d["roc"]
+    for d in data_subset_indel:
+        del d["roc"]
+
+    qq_fields = list(set([x.qq_field for x in metrics]))
+
+    # 3. run Jinja2 to make the HTML page
+    return {
+        "snp_table": json.dumps(json.dumps(data_subset_snp)),
+        "snp_roc": json.dumps(json.dumps(data_subset_snp_roc)),
+        "indel_table": json.dumps(json.dumps(data_subset_indel)),
+        "indel_roc": json.dumps(json.dumps(data_subset_indel_roc)),
+        "qq_fields": qq_fields,
+    }
 
 
 def main():
@@ -55,6 +114,8 @@ def main():
 
     args = parser.parse_args()
 
+    # 1. Read input files
+
     if args.output.endswith(".gz"):
         args.output = gzip.GzipFile(args.output, "w")
     elif not args.output.endswith(".html"):
@@ -68,7 +129,7 @@ def main():
         cmethod_label = "default"
 
         if len(l) <= 1:
-            rfiles = l[0]
+            rfiles = [l[0]]
         else:
             rfiles = l[1:]
             labels = l[0].split("_")
@@ -90,15 +151,15 @@ def main():
                                                   )
         metrics += row_metrics
 
-    loader = jinja2.FileSystemLoader(searchpath=TEMPLATEDIR)
-    env = jinja2.Environment(loader=loader)
-
-    template_vars = {
-        "content": report.make_report(metrics)
-    }
-
     if not metrics:
         raise Exception("No inputs specified.")
+
+    # 2. Subset data, only read SNP / indel, ALL, PASS
+    template_vars = extract_metrics(metrics)
+
+    # 3. render template
+    loader = jinja2.FileSystemLoader(searchpath=TEMPLATEDIR)
+    env = jinja2.Environment(loader=loader)
 
     template = env.get_template("report.jinja2.html")
     template.stream(**template_vars).dump(args.output)
