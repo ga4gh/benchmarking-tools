@@ -18,19 +18,19 @@ cd ..
 REPPY_INPUTS=""
 
 # GA4GH v25 app outputs might contain two results each
-for f in results_1/results/result_1.roc.all.gz  results_1/results/result_2.roc.all.gz ; do
+for f in results_1/results/result_1.roc.all.csv.gz  results_1/results/result_2.roc.all.csv.gz ; do
     if [[ -f $f ]]; then
         REPPY_INPUTS="${REPPY_INPUTS} ${SAFE_LABEL_1}_${SAFE_LABEL_M1}:$f"
     fi
 done
 
-for f in results_2/results/result_1.roc.all.gz  results_2/results/result_2.roc.all.gz ; do
+for f in results_2/results/result_1.roc.all.csv.gz  results_2/results/result_2.roc.all.csv.gz ; do
     if [[ -f $f ]]; then
         REPPY_INPUTS="${REPPY_INPUTS} ${SAFE_LABEL_2}_${SAFE_LABEL_M2}:$f"
     fi
 done
 
-REPPY="python /opt/ga4gh-benchmarking-tools/reporting/basic/bin/rep.py $REPPY_INPUTS -o output.html"
+REPPY="python /opt/ga4gh-benchmarking-tools/reporting/basic/bin/rep.py $REPPY_INPUTS -o comparison.html"
 echo "$REPPY"
 $REPPY
 

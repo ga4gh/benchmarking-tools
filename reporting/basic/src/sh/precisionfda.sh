@@ -71,16 +71,15 @@ if  [[ "$use_stratification" != "none" ]]; then
         echo "Stratification regions are not supported on reference $reference"
         exit 1;
     fi
-    if [[ "$use_stratification" == "all" ]]; then
-        strat="/opt/ga4gh-benchmarking-tools/resources/stratification-bed-files/files.tsv"
-    else
-        strat="/opt/ga4gh-benchmarking-tools/resources/stratification-bed-files/ga4gh_${use_stratification}.tsv"
-    fi
+    strat="/opt/ga4gh-benchmarking-tools/resources/stratification-bed-files/ga4gh_${use_stratification}.tsv"
     if [[ -f "$strat" ]]; then
       HXX="${HXX} --stratification ${strat}"
       if $fixchr; then
           HXX="${HXX} --stratification-fixchr"
       fi
+    else
+       echo "Unknown stratification regions: ${use_stratification}"
+       exit 1
     fi
 fi
 

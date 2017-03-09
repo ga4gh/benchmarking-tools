@@ -1,4 +1,4 @@
 map_siren	mappability/siren_similarRegions_dist1.bed.gz
 tech_badpromoters	FunctionalTechnicallyDifficultRegions/BadPromoters_gb-2013-14-5-r51-s1.bed.gz
-func_cds	FunctionalRegions/refseq_union_cds.sort.bed.gz
+func_cds	FunctionalRegions/refseq_union_cds.sort.coordsonly.bed.gz
 decoy	SegmentalDuplications/mm-2-merged.bed.gz
