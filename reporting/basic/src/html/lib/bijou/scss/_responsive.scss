@@ -1,6 +1,12 @@
 
 /* RESPONSIVE */
 
+@media only screen and (min-width: 1000px) and (max-width: 1199px) {
+	.container{
+		width: 980px;
+	}
+}
+
 @media only screen and (min-width: 768px) and (max-width: 999px) {
 	.container{
 		width:768px;

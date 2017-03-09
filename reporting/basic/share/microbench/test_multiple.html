@@ -721,6 +721,9 @@ h6 {
     border: 1px #f7cfc4 solid; }
 
 /* RESPONSIVE */
+@media only screen and (min-width: 1000px) and (max-width: 1199px) {
+  .container {
+    width: 980px; } }
 @media only screen and (min-width: 768px) and (max-width: 999px) {
   .container {
     width: 768px; } }
@@ -762,10 +765,6 @@ h3 {
 
 p {
     margin-bottom: 1ex;
-}
-
-.container {
-    max-width: 1200px;
 }
 
 .centered {
@@ -847,6 +846,10 @@ Makes things fit, but also less readable
     font-size: 9.5px;
 }
 */
+
+table.table {
+    margin-bottom: 0.5ex;
+}
 
 table.table > tbody > tr td.highlighted_metric {
     background-color: #fafafa;
@@ -1531,7 +1534,7 @@ input[type="text"].focus {
 </script>
     </p>
     <p>
-        Indels have the following subtypes:
+        Indels have the following subtypes (revealed when showing additional metrics):
     </p>
     <table class="table">
         <thead>

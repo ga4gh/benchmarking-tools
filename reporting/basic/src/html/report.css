@@ -22,10 +22,6 @@ p {
     margin-bottom: 1ex;
 }
 
-.container {
-    max-width: 1200px;
-}
-
 .centered {
     width: 100%;
     text-align: center;
@@ -105,6 +101,10 @@ Makes things fit, but also less readable
     font-size: 9.5px;
 }
 */
+
+table.table {
+    margin-bottom: 0.5ex;
+}
 
 table.table > tbody > tr td.highlighted_metric {
     background-color: #fafafa;
