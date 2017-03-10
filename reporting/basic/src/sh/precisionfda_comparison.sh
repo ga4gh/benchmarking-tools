@@ -30,7 +30,7 @@ for f in results_2/results/result_1.roc.all.csv.gz  results_2/results/result_2.r
     fi
 done
 
-REPPY="python /opt/ga4gh-benchmarking-tools/reporting/basic/bin/rep.py $REPPY_INPUTS -o comparison.html"
+REPPY="python /opt/ga4gh-reporting/bin/rep.py $REPPY_INPUTS -o comparison.html"
 echo "$REPPY"
 $REPPY
 

@@ -19,7 +19,7 @@ fi
 
 mkdir -p results
 
-HXX="-r ${HGREF} --verbose"
+HXX="-r ${HGREF} --verbose --gender ${sample_gender}"
 COMPARISON_METHOD="${reference}"
 
 if [[ "$truth_bed" != "" ]]; then
@@ -102,7 +102,7 @@ if [[ "$query_2_vcf" != "" ]]; then
   REPPY_INPUTS="${REPPY_INPUTS} ${SAFE_LABEL_2}_${SAFE_LABEL_M}:results/result_2.roc.all.csv.gz"
 fi
 
-REPPY="python /opt/ga4gh-benchmarking-tools/reporting/basic/bin/rep.py $REPPY_INPUTS -o output.html"
+REPPY="python /opt/ga4gh-reporting/bin/rep.py $REPPY_INPUTS -o output.html"
 echo "$REPPY"
 $REPPY
 
