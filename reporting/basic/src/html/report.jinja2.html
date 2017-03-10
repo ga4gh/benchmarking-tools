@@ -1,3 +1,5 @@
+{% import 'metrics_table.jinja2.html' as table %}
+{% import 'roc_plot.jinja2.html' as plot %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,7 +26,84 @@
 </head>
 <body>
 <div class="container">
-    {{ content }}
+    <h1>Summary Statistics</h1>
+
+    <p>
+        The following tables summarize precision and recall for SNPs and Indels. By default we only
+        show performance for variant calls that pass filters. Clicking "Show ALL calls" will reveal
+        the performance for all calls in the query VCFs. Typically, ALL values will have higher
+        lower precision and give an approximation of the maximum recall a method can achieve.
+    </p>
+
+    <p>
+        Revealing additional metrics and stratified results will also show stratification region results.
+        If no stratification regions were used, the <i>TS_boundary</i> and <i>TS_contained</i> subsets
+        show how different the behavior is on the truthset boundaries, where the comparison methods
+        might be less accurate.
+    </p>
+
+    <h2>SNPs</h2>
+    <p>
+        {{ table.pr_table("snp", snp_table) }}
+    </p>
+
+    <h2>INDELS</h2>
+    <p>
+        {{ table.pr_table("indel", indel_table) }}
+    </p>
+    <p>
+        Indels have the following subtypes (revealed when showing additional metrics):
+    </p>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Subtype</th>
+            <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>*</td>
+            <td>All indels</td>
+        </tr>
+        <tr>
+            <td>I1_5 / D1_5 / C1_5</td>
+            <td><b>I</b>nsertions / <b>D</b>eletions / <b>C</b>omplex variants of size <= 5</td>
+        </tr>
+        <tr>
+            <td>I6_15 / D6_15 / C6_15</td>
+            <td><b>I</b>nsertions / <b>D</b>eletions / <b>C</b>omplex variants with 6 <= size <= 15</td>
+        </tr>
+        <tr>
+            <td>I16_PLUS / D16_PLUS / C16_PLUS</td>
+            <td><b>I</b>nsertions / <b>D</b>eletions / <b>C</b>omplex variants with  size > 15</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h1>Precision / Recall Curves</h1>
+
+    <p>
+        The following precision / recall curves show how recall changes when varying a quality score
+        threshold for a parameter that was chosen when running the comparison. In this comparison, the
+        following parameters were used: {{ qq_fields }}.
+    </p>
+
+    <p>
+        By default, we show the ALL point, the PASS point and a curve starting at PASS. Hovering over a curve reveals the
+        precision/recall curve starting at ALL. Note that since the PASS point may be the result of a combination of filters,
+        the ALL curve might not contain the PASS point.
+    </p>
+
+    <h2>SNPs</h2>
+    <p>
+        {{ plot.rocplot("snp_roc", snp_roc) }}
+    </p>
+
+    <h2>INDELs</h2>
+    <p>
+        {{ plot.rocplot("indel_roc", indel_roc) }}
+    </p>
 </div>
 </body>
 </html>

@@ -1,4 +1,5 @@
 body {
+    margin: 0 auto;
     font: 16px sans-serif;
 }
 
@@ -14,6 +15,10 @@ h2 {
 
 h3 {
     margin-top: 1ex;
+    margin-bottom: 1ex;
+}
+
+p {
     margin-bottom: 1ex;
 }
 
@@ -96,6 +101,10 @@ Makes things fit, but also less readable
     font-size: 9.5px;
 }
 */
+
+table.table {
+    margin-bottom: 0.5ex;
+}
 
 table.table > tbody > tr td.highlighted_metric {
     background-color: #fafafa;

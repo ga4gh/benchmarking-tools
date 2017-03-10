@@ -1,5 +1,5 @@
 /* BIJOU CSS */
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
+@import url(//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700);
 /* VARIABLES */
 /* Colors */
 /* Widths */
@@ -204,6 +204,9 @@ h6 {
     border: 1px #f7cfc4 solid; }
 
 /* RESPONSIVE */
+@media only screen and (min-width: 1000px) and (max-width: 1199px) {
+  .container {
+    width: 980px; } }
 @media only screen and (min-width: 768px) and (max-width: 999px) {
   .container {
     width: 768px; } }

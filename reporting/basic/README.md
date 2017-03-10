@@ -9,7 +9,7 @@ A more detailed description of this work is available at [https://github.com/ga4
 
 ## Input
 
-* one or more diploid test VCF files
+* Hap.py / quantify outputs from a comparison with vcfeval or hap.py
 * Genome in a Bottle or Platinum Genomes truth files
 
 ## Output
@@ -18,25 +18,17 @@ A more detailed description of this work is available at [https://github.com/ga4
 
 # Basic Usage
 
-There are two scripts in the [bin] folder:
-
-* **run.py** : run hap.py and produce a report
-
-```bash
-python run.py -o test.html test.vcf.gz --truthset GOLD:gold.vcf.gz:gold.bed.gz
-```
-
 * **rep.py** : make a report from hap.py results
 
 ```bash
-python rep.py -m test-comparison -o test.html result.roc.all.vcf.gz
+python rep.py -o test.html method_comparison:result.roc.all.csv.gz
 ```
 
 See also [share/microbench](share/microbench) for a demo.
 
 # Dependencies
 
-* hap.py v0.3.1+ -- [https://github.com/Illumina/hap.py/tree/dev-0.3](https://github.com/Illumina/hap.py/tree/dev-0.3)
+* hap.py v0.3.7+ -- [https://github.com/Illumina/hap.py/tree/dev-0.3](https://github.com/Illumina/hap.py/tree/dev-0.3)
 * rtgtools vcfeval in the GA4GH version: [https://github.com/RealTimeGenomics/rtg-tools/tree/ga4gh-test](https://github.com/RealTimeGenomics/rtg-tools/tree/ga4gh-test)
   hap.py should me compiled with vcfeval support, which downloads the correct version automatically
 * A truth set, e.g. Platinum Genomes or Genome in a Bottle
