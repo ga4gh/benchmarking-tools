@@ -37,22 +37,38 @@ else
   HXX="${HXX} --no-adjust-conf-regions"
 fi
 
-if $use_partial_credit; then
-  echo "using partial credit via variant decomposition"
-  HXX="${HXX} --decompose --leftshift"
-  COMPARISON_METHOD="${COMPARISON_METHOD}-partialcredit"
-else
-  echo "no partial credit / variant decomposition is used"
-  HXX="${HXX} --no-decompose --no-leftshift"
-  COMPARISON_METHOD="${COMPARISON_METHOD}-nopartialcredit"
+if [[ "$comparison_method" == xcmp* ]]; then
+  echo "Using xcmp for comparison"
+  HXX="${HXX} --engine=xcmp"
+  COMPARISON_METHOD="${COMPARISON_METHOD}-xcmp"
 fi
 
-if $use_vcfeval; then
+if [[ "$comparison_method" == vcfeval* ]]; then
   echo "Using vcfeval for comparison"
   HXX="${HXX} --engine=vcfeval --engine-vcfeval-path=/opt/rtg/rtg"
   COMPARISON_METHOD="${COMPARISON_METHOD}-vcfeval"
+fi
+
+if [[ "$comparison_method" == allelebased* ]]; then
+  echo "Using allele-based comparison"
+  HXX="${HXX} --engine=scmp-somatic"
+  COMPARISON_METHOD="${COMPARISON_METHOD}-allelebased"
+fi
+
+if [[ "$comparison_method" == distance* ]]; then
+  echo "Using distance-based comparison with threshold ${distance_threshold}"
+  HXX="${HXX} --engine=scmp-distance --scmp-distance=${distance_threshold}"
+  COMPARISON_METHOD="${COMPARISON_METHOD}-distance${distance_threshold}"
+fi
+
+if [[ "$comparison_method" == *no-partialcredit ]] || [[ "$comparison_method" == distance* ]]; then
+  echo "no partial credit / variant decomposition is used"
+  HXX="${HXX} --no-decompose --no-leftshift"
+  COMPARISON_METHOD="${COMPARISON_METHOD}-nopartialcredit"
 else
-  COMPARISON_METHOD="${COMPARISON_METHOD}-xcmp"
+  echo "using partial credit via variant decomposition"
+  HXX="${HXX} --decompose --leftshift"
+  COMPARISON_METHOD="${COMPARISON_METHOD}-partialcredit"
 fi
 
 if [[ "$target_bed" != "" ]]; then
@@ -83,9 +99,16 @@ if  [[ "$use_stratification" != "none" ]]; then
     fi
 fi
 
+/opt/hap.py/bin/vcfcheck ${truth_vcf_path} --check-bcf-errors 1
+/opt/hap.py/bin/vcfcheck ${query_vcf_path} --check-bcf-errors 1
+
+if [[ "$query_2_vcf" != "" ]]; then
+  /opt/hap.py/bin/vcfcheck ${query_2_vcf_path} --check-bcf-errors 1
+fi
+
 HAPPY="/opt/hap.py/bin/hap.py"
-HAPPY_1="${HAPPY} ${truth_vcf_path} $query_vcf_path -o results/result_1 ${HXX}"
-HAPPY_2="${HAPPY} ${truth_vcf_path} $query_2_vcf_path -o results/result_2 ${HXX}"
+HAPPY_1="${HAPPY} ${truth_vcf_path} ${query_vcf_path} -o results/result_1 ${HXX}"
+HAPPY_2="${HAPPY} ${truth_vcf_path} ${query_2_vcf_path} -o results/result_2 ${HXX}"
 
 echo "$HAPPY_1"
 $HAPPY_1 2>&1 | tee happy.log
