@@ -97,6 +97,24 @@ if  [[ "$use_stratification" != "none" ]]; then
        echo "Unknown stratification regions: ${use_stratification}"
        exit 1
     fi
+elif [[ "$custom_stratification" != "" ]]; then
+  mkdir -p `pwd`/custom_stratification
+  tar xf $custom_stratification_path -C `pwd`/custom_stratification --no-same-permissions
+  TSVCOUNT=$(ls -l `pwd`/custom_stratification/*.tsv | wc -l)
+  if [[ $TSVCOUNT != 1 ]]; then
+    echo "More than one tsv file found in tar file for custom_stratification. Please make sure only one such file is in the archive."
+    exit 1
+  fi
+  strat=$(ls `pwd`/custom_stratification/*.tsv)
+  if [[ -f "$strat" ]]; then
+    HXX="${HXX} --stratification ${strat}"
+    if $fixchr; then
+        HXX="${HXX} --stratification-fixchr"
+    fi
+  else
+     echo "Cannot use stratification regions: ${custom_stratification}"
+     exit 1
+  fi
 fi
 
 /opt/hap.py/bin/vcfcheck ${truth_vcf_path} --check-bcf-errors 1
