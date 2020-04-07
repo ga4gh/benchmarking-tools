@@ -2,17 +2,19 @@
 
 # Summary
 
-The [Genome in a Bottle Consortium](http://www.genomeinabottle.org) has developed high-confidence variant calls for several genomes that are Reference Materials (RMs) from the National Institute of Standards and Technology (NIST).  Currently, these genomes are:
+The [Genome in a Bottle Consortium](http://www.genomeinabottle.org) has developed benchmark "high-confidence" variant calls and regions for several genomes that are Reference Materials (RMs) from the National Institute of Standards and Technology (NIST).  Currently, these genomes are:
 
 * HG001/NA12878 - available as [NIST RM 8398](http://www.tinyurl.com/giabpilot)
 * HG002/NA24385/AJ Son - available as [NIST RM 8391](http://www.tinyurl.com/giabajson) and [NIST RM 8392](http://www.tinyurl.com/giabajtrio)
 * HG003/NA24149/AJ Father - available as [NIST RM 8392](http://www.tinyurl.com/giabajtrio)
 * HG004/NA24143/AJ Mother - available as [NIST RM 8392](http://www.tinyurl.com/giabajtrio)
 * HG005/NA24631/Chinese Son - available as [NIST RM 8393](http://www.tinyurl.com/giabchineseson)
+* HG006/NA24694/Chinese Father - available only from Coriell
+* HG007/NA24695/Chinese Mother - available only from Coriell
 
-The high-confidence calls were formed by integrating data from multiple technologies. The vcf and bed files are intended to be used in conjunction to benchmark accuracy of small variant calls.  We strongly recommend reading the information below prior to using these calls to understand how best to use them and their limitations.  A manuscript will be prepared about these calls in the future.  Until then, please cite http://www.nature.com/nbt/journal/v32/n3/full/nbt.2835.html (doi:10.1038/nbt.2835) and http://www.nature.com/articles/sdata201625 (doi:10.1038/sdata.2016.25) when using these calls.
+The various IDs for these genomes are in this table: [https://www.nature.com/articles/sdata201625/tables/3](https://www.nature.com/articles/sdata201625/tables/3)
 
-If you have any questions, please contact us at [http://jimb.stanford.edu/contact/](http://jimb.stanford.edu/contact/).
+The high-confidence calls were formed by integrating data from multiple technologies. The vcf and bed files are intended to be used in conjunction to benchmark accuracy of small variant calls.  We strongly recommend reading the information below prior to using these calls to understand how best to use them and their limitations.  A manuscript describing these calls is at [https://rdcu.be/bue67](https://rdcu.be/bue67).
 
 To help us improve future versions of calls, we encourage you to report sites in the high-confidence regions that appear to be questionable in the high-confidence calls at:
 [https://goo.gl/forms/6MTIUx4vmYtYyz1t1](https://goo.gl/forms/6MTIUx4vmYtYyz1t1)
@@ -21,24 +23,27 @@ To help us improve future versions of calls, we encourage you to report sites in
 
 The latest VCF and BED files with the high-confidence calls and regions can be obtained from the "latest" directory under each genome at the Genome in a Bottle FTP site: 
 
-[ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/release](ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/release)
+[ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/](ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/release/)
+
+A new v4.1 small variant benchmark covering more difficult regions is currently available only for HG002 at:
+[ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/analysis/NIST_v4.1_SmallVariantDraftBenchmark_12182019/](ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/analysis/NIST_v4.1_SmallVariantDraftBenchmark_12182019/)
 
 # Benchmarking Recipe
 
-As an example for v3.3 high-confidence calls for HG001/NA12878, using [hap.py](http://github.com/Illumina/hap.py), a query VCF file for GRCh37 can be compared to these high-confidence calls and regions as follows:
+As an example for v4.1 benchmark calls for HG002/NA24385, using [hap.py](http://github.com/Illumina/hap.py), a query VCF file for GRCh37 can be compared to these high-confidence calls and regions as follows:
 
 ```bash
-wget ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/release/NA12878_HG001/NISTv3.3/NA12878_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-X_v3.3_highconf.vcf.gz
-wget ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/release/NA12878_HG001/NISTv3.3/NA12878_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-X_v3.3_highconf.vcf.gz.tbi
-wget ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/release/NA12878_HG001/NISTv3.3/NA12878_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-X_v3.3_highconf.bed
+wget ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/analysis/NIST_v4.1_SmallVariantDraftBenchmark_12182019/GRCh37/HG002_GRCh37_1_22_v4.1_draft_benchmark.vcf.gz
+wget ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/analysis/NIST_v4.1_SmallVariantDraftBenchmark_12182019/GRCh37/HG002_GRCh37_1_22_v4.1_draft_benchmark.vcf.gz.tbi
+wget ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data/AshkenazimTrio/analysis/NIST_v4.1_SmallVariantDraftBenchmark_12182019/GRCh37/HG002_GRCh37_1_22_v4.1_draft_benchmark.bed
 
-hap.py NA12878_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-X_v3.3_highconf.vcf.gz query.vcf.gz -f NA12878_GIAB_highconf_CG-IllFB-IllGATKHC-Ion-Solid-10X_CHROM1-X_v3.3_highconf.bed -o benchmarking-output
+hap.py HG002_GRCh37_1_22_v4.1_draft_benchmark.vcf.gz query.vcf.gz -f HG002_GRCh37_1_22_v4.1_draft_benchmark.bed -o benchmarking-output
 ```
 
 # Raw Data
 
 Raw data sets and analyses are available from the GIAB ftp site under each genome at:
-[ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data](ftp://ftp-trace.ncbi.nlm.nih.gov/giab/ftp/data)
+[ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data](ftp://ftp-trace.ncbi.nlm.nih.gov/ReferenceSamples/giab/data)
 
 Many of these data sets are described in a Scientific Data publication from 2016:
 [http://www.nature.com/articles/sdata201625](http://www.nature.com/articles/sdata201625)
@@ -54,6 +59,102 @@ Benchmarking variant calls is a complex process, and best practices are still be
 Manual curation of sequence data in a genome browser for a subset of false positives and false negatives is essential for an accurate understanding of statistics like sensitivity and precision.  Curation can often help elucidate whether the benchmark callset is wrong, the test callset is wrong, both callsets are wrong, or the true answer is unclear from current technologies.  If you find questionable or challenging sites, reporting them will help improve future callsets.  We encourage anyone to report information about particular sites at http://goo.gl/forms/OCUnvDXMEt1NEX8m2. 
 
 # Version History
+Changes in v4.1 from v3.3.2:
+1. Use PacBio CCS calls from DeepVariant and GATK.  For DeepVariant, exclude RefCalls with GQ<40, but allow calls in homopolymers <11bp
+2. Use 10x Genomics LongRanger variant calls instead of custom, conservative 10x calls
+3. Used targeted diploid assembly of PacBio CCS to create benchmark variants and regions for MHC (6:28477800-31946000 and 6:32017001-33448350 in GRCh37, excluding a misassembly in the region containing CYP21A2, CYP21A1P, TNXA, and TNXB)
+4. For GRCh37, we removed regions that were expanded or compressed in GRCh38 relative to GRCh37 are excluded from our GRCh37 benchmark regions (GRC and minimap2 alignments)
+5. We used the new v0.6 structural variant calls to exclude putative structural variant regions, expanded by 50% on each side
+6. We exclude regions with higher than expected (3rd Quartile + 1.5*IQR coverage in 1000 bp windows calculated using mosdepth) coverage in both PacBio and ONT to exclude potential duplications in HG002
+7. We exclude regions called as duplications by MrCaNaVaR from Illumina WGS, which include segmental duplications in the reference, from short read callable regions
+8. We exclude 15kb on either side of N’s in the reference to minimize errors around gaps in GRCh37 or GRCh38
+9. We exclude regions covered by more than one contig for either haplotype of a diploid assembly generated from PacBio and from ONT
+10. We exclude regions covered by segmental duplications greater than >10kb and more than 5 copies with >99% similarity to each other
+11. We exclude L1H LINEs >500bp in length from short read callable regions to minimize clusters of variants missed by short reads
+12. We exclude difficult to map regions from short reads
+13. We now use additional tandem repeat and low complexity annotations from RepeatMasker and TRF because our previous bed files had missed excluding some long tandem repeats from short and linked read methods
+14. Remove small benchmark regions <50bp in size
+15. Now use a segmental duplications bed file for GRCh38 instead of the self-chain, since the GRCh38 self-chain had some problems
+
+
+Changes in v3.3.2:
+1. Fix bug in callable regions script for GATKHC gvcf, which was erroneously determining too many regions to be callable; add "difficult region" bed file annotation to high confidence vcf
+2. filter sites that are within 50bp of another passing call but none of the callsets that support the 2 calls match, because some nearby conflicting calls from different callers were both considered high confidence if another callset from the same dataset was filtered.  This eliminates many problematic cases, but a small number of conflicting calls remain.
+3. Subtract SV regions from HG005 bed when called by MetaSV in any member of the Chinese trio (Thanks to Roche/Bina for running MetaSV)
+4. We have GRCh38 calls for all individuals.
+5. For new GRCh38 analyses of Illumina and 10X data in AJ trio and Chinese son, use sentieon haplotyper in place of GATK-HC, since it gives essentially identical results and runs faster. (Thanks to Rafael Saldana at Sentieon for help running this)
+6. Use RTG vcfeval tools to harmonize representation of complex variants in AJ trio prior to performing Mendelian inheritance analysis and phasing. Apply trio phasing to HG002 high confidence vcf, and exclude 50bp from high-confidence beds for all AJ trio individuals on either side of Mendelian inheritance errors that are not de novo mutations.
+7. For the phased vcfs for HG001 and HG002, include phasing information both from family-based phasing and from local read-based phasing, prioritizing family-based phasing.  For family-based phased calls, the PS field contains PATMAT.  For local read-based phased calls, the PS field contains the PID from GATKHC.  For homozygous calls that were not otherwise phased, we changed their status to phased and put HOMVAR in PS.  Pedigree and trio phased calls have alleles in the order paternal|maternal. For phasing comparisons that require paternal|maternal phasing, only calls with PATMAT in PS should be included.  For HG001, 99.0% of high-confidence calls are phased by the Platinum Genome or RTG pedigree analyses, and 99.5% are phased by the pedigree, GATKHC, or are homozygous variant.  For HG002, 87.0% of high-confidence calls are phased by the trio, and 89.5% of calls are phased by the trio, GATKHC, or are homozygous variant. (Thanks to Sean Irvine and Len Trigg at RTG for help with these analyses)
+
+Changes in v3.3.1:
+1. Because freebayes sometimes misses calls in repetitive regions, now exclude tandem repeats of any size from freebayes callable regions. Also, exclude these regions from GATK-HC calls for Mate-Pair data since amplification causes a higher error rate.
+2. Change GATK-HC gvcf parsing to ignore reference bases with low GQ within 10bp of an indel, since these often caused us to exclude good indels.  This significantly increases the number of indels to 505169 in 3.3.1 vs. 358753 in v3.3
+3. Now make calls for GRCh38 in addition to GRCh37 (initially only for HG001). For illumina and 10X data, variant calls were made similarly to GRCh37 but from reads mapped to GRCh38 with decoy but no alts (ftp://ftp.ncbi.nlm.nih.gov/genomes/all/GCA_000001405.15_GRCh38/seqs_for_alignment_pipelines.ucsc_ids/GCA_000001405.15_GRCh38_no_alt_plus_hs38d1_analysis_set.fna.gz).  For Complete Genomics, Ion exome, and SOLiD data, vcf and callable bed files were converted from GRCh37 to GRCh38 by Cory McLean from Verily using the tool GenomeWarp (https://github.com/verilylifesciences/genomewarp).  This tool converts vcf and callable bed files in a conservative and sophisticated manner, accounting for base changes that were made between the two references.  Modeled centromere and heterochromatin regions are explicitly exclude from the high-confidence bed.
+4. Add phasing information from Real Time Genomics and Illumina Platinum Genomes phased pedigree calls so that now 98-99% of calls are phased.  The process used is described below.
+
+Phasing process applied to v3.3.1 for HG001 by RTG:
+Using the fully-phased RTG SegregationPhasing v.37.3.3 and Illumina Platinum Genomes 2016-1.0 we used vcfeval to transfer phasing information to GIAB v3.3.1 for NA12878.  The resulting call sets for GRCh37 and GRCh38 are 98.6% and 98.0% phased, respectively.  The phase transfer is performed in such a way that the original calls and genotypes of GIAB v3.3.1 are not changed (other than phasing).  In both cases, the existing local phasing of GIAB v3.3.1 was dropped before doing the transfer.
+
+Details for fully-phased sets:
+
+SegregationPhasing: 100.0% (4222244/4224035)
+Cleaned SegregationPhasing: 100.0% (4222244/4224024)
+Platinum Genomes: 100.0% (4049512/4049512)
+Cleaned Platinum Genomes: 100.0% (4049512/4049512)
+
+Details for GRCh37:
+
+Original calls: 10.1% (388646/3843181)
+Original calls phasing removed: 0% (0/3843181)
+SP Transfered: 98.1% (3770070/3843181)
+SP and PG Transfered: 98.6% (3788674/3843181)
+
+Failed Filters               : 0
+Passed Filters               : 3843181
+SNPs                         : 3271601
+MNPs                         : 0
+Insertions                   : 268387
+Deletions                    : 287319
+Indels                       : 15874
+Same as reference            : 0
+Phased Genotypes             : 98.6% (3788674/3843181)
+SNP Transitions/Transversions: 2.09 (3090872/1477889)
+Total Het/Hom ratio          : 1.53 (2323803/1519378)
+SNP Het/Hom ratio            : 1.52 (1975346/1296255)
+MNP Het/Hom ratio            : - (0/0)
+Insertion Het/Hom ratio      : 1.40 (156335/112052)
+Deletion Het/Hom ratio       : 1.59 (176522/110797)
+Indel Het/Hom ratio          : 56.93 (15600/274)
+Insertion/Deletion ratio     : 0.93 (268387/287319)
+Indel/SNP+MNP ratio          : 0.17 (571580/3271601)
+
+
+Details for GRCh38:
+
+Original calls: 10.2% (377091/3709412)
+Original calls phasing removed: 0% (0/3709412)
+SP Transfered: 97.3% (3607917/3709412)
+SP and PG Transfered: 98.0% (3634961/3709412)
+
+Failed Filters               : 0
+Passed Filters               : 3709412
+SNPs                         : 3102724
+MNPs                         : 0
+Insertions                   : 293598
+Deletions                    : 296423
+Indels                       : 16667
+Same as reference            : 0
+Phased Genotypes             : 98.0% (3634961/3709412)
+SNP Transitions/Transversions: 2.09 (2925118/1398168)
+Total Het/Hom ratio          : 1.59 (2277006/1432406)
+SNP Het/Hom ratio            : 1.54 (1883057/1219667)
+MNP Het/Hom ratio            : - (0/0)
+Insertion Het/Hom ratio      : 1.74 (186337/107261)
+Deletion Het/Hom ratio       : 1.82 (191242/105181)
+Indel Het/Hom ratio          : 55.12 (16370/297)
+Insertion/Deletion ratio     : 0.99 (293598/296423)
+Indel/SNP+MNP ratio          : 0.20 (606688/3102724)
+
 Changes in v3.3:
 Enable use of phased calls and phase ID's from GATK-HC and output these in GT and PID when possible for locally phased variants
 Enable bed files describing difficult regions to be excluded per callset when defining callable regions rather than excluded from the high-confidence bed file at the end.  This allows us, for example, to exclude tandem repeats from 10X Genomics and exclude decoy and segmental duplications from everything except 10X Genomics. These bed files are included in the supplementaryFiles directory
